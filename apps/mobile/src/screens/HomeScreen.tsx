@@ -8,6 +8,12 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const actions = [
   {
+    title: 'Usuários e acessos',
+    description: 'Crie operadores e administre papéis e acessos ativos.',
+    badge: 'ADMINISTRAÇÃO',
+    route: 'Users' as const,
+  },
+  {
     title: 'Registrar compra',
     description: 'Selecione os materiais, informe os pesos e confirme o valor calculado.',
     badge: 'FLUXO PRINCIPAL',
@@ -29,7 +35,7 @@ const actions = [
 
 export function HomeScreen({ navigation }: Props) {
   const { user, logout } = useAuth();
-  const visibleActions = actions.filter((action) => action.route !== 'Materials' || user?.role === 'ADMIN');
+  const visibleActions = actions.filter((action) => !['Materials', 'Users'].includes(action.route) || user?.role === 'ADMIN');
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <View style={styles.hero}>
