@@ -12,6 +12,11 @@ export const errorHandler: ErrorRequestHandler = (error, _request, response, _ne
     return;
   }
 
+  if (typeof error === 'object' && error && 'code' in error && error.code === 11000) {
+    response.status(409).json({ message: 'Já existe um registro com os dados informados.' });
+    return;
+  }
+
   console.error(error);
   response.status(500).json({ message: 'Erro interno do servidor.' });
 };

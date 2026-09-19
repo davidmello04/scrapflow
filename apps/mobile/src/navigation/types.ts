@@ -10,4 +10,6 @@ export type RootStackParamList = {
   PurchaseReceipt: { purchase: Purchase };
   PurchaseHistory: undefined;
   PurchaseDetail: { purchaseId: string };
+  Users: undefined;
+  NewUser: undefined;
 };

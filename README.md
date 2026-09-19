@@ -15,6 +15,7 @@ O ScrapFlow organiza o fluxo diário de um ponto de compra de recicláveis:
 - histórico com busca por vendedor, filtros de período e detalhe persistido;
 - comprovante PDF com impressão e compartilhamento pelo dispositivo;
 - autenticação com sessão segura e perfis `ADMIN` e `OPERATOR`;
+- administração de contas com criação, papéis e ativação/desativação segura;
 - cálculo automático de subtotais e total;
 - histórico de operações;
 - base preparada para emissão e compartilhamento de comprovantes em PDF.

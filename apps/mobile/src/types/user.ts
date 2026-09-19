@@ -8,3 +8,16 @@ export type AuthUser = {
 };
 
 export type LoginResponse = { accessToken: string; user: AuthUser };
+
+export type ManagedUser = AuthUser & {
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateUserInput = {
+  name: string;
+  email: string;
+  password: string;
+  role: UserRole;
+};

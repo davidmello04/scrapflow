@@ -7,6 +7,7 @@ import { materialsRouter } from './routes/materials.js';
 import { purchasesRouter } from './routes/purchases.js';
 import { authRouter } from './routes/auth.js';
 import { authenticate } from './middleware/auth.js';
+import { usersRouter } from './routes/users.js';
 
 export const app = express();
 
@@ -19,4 +20,5 @@ app.use('/api/auth', authRouter);
 app.use('/api', authenticate);
 app.use('/api/materials', materialsRouter);
 app.use('/api/purchases', purchasesRouter);
+app.use('/api/users', usersRouter);
 app.use(errorHandler);

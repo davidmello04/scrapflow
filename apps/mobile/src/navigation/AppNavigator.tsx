@@ -11,6 +11,8 @@ import type { RootStackParamList } from './types';
 import { useAuth } from '../auth/AuthContext';
 import { LoginScreen } from '../screens/LoginScreen';
 import { ActivityIndicator, View } from 'react-native';
+import { UsersScreen } from '../screens/UsersScreen';
+import { NewUserScreen } from '../screens/NewUserScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -48,6 +50,8 @@ export function AppNavigator() {
       />
       <Stack.Screen name="PurchaseHistory" component={PurchaseHistoryScreen} options={{ title: 'Histórico de compras' }} />
       <Stack.Screen name="PurchaseDetail" component={PurchaseDetailScreen} options={{ title: 'Detalhes da compra' }} />
+      {user.role === 'ADMIN' && <Stack.Screen name="Users" component={UsersScreen} options={{ title: 'Usuários' }} />}
+      {user.role === 'ADMIN' && <Stack.Screen name="NewUser" component={NewUserScreen} options={{ title: 'Novo usuário' }} />}
     </Stack.Navigator>
   );
 }
