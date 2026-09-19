@@ -2,7 +2,7 @@
   "name": "@scrapflow/mobile",
   "private": true,
   "version": "0.1.0",
-  "main": "expo/AppEntry.js",
+  "main": "index.ts",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -12,13 +12,17 @@
     "test": "echo 'Mobile tests will be added with the purchase flow'"
   },
   "dependencies": {
+    "@react-navigation/native": "^7.4.1",
+    "@react-navigation/native-stack": "^7.19.2",
     "expo": "~57.0.24",
     "expo-status-bar": "~57.0.1",
-    "react": "19.3.0",
-    "react-native": "0.87.1"
+    "react": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0"
   },
   "devDependencies": {
-    "@types/react": "~19.3.0",
+    "@types/react": "~19.2.14",
     "typescript": "~5.9.3"
   }
 }
