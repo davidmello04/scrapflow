@@ -10,6 +10,7 @@ const userSchema = new Schema(
     passwordHash: { type: String, required: true, select: false },
     role: { type: String, enum: userRoles, required: true },
     active: { type: Boolean, default: true, index: true },
+    sessionVersion: { type: Number, default: 0, min: 0 },
   },
   { timestamps: true },
 );

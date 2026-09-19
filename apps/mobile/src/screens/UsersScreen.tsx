@@ -59,6 +59,7 @@ export function UsersScreen({ navigation }: Props) {
                 <View style={styles.cardTop}><View style={styles.userMain}><Text style={styles.name}>{item.name}{isSelf ? ' (você)' : ''}</Text><Text style={styles.email}>{item.email}</Text></View><Text style={[styles.status, item.active ? styles.statusActive : styles.statusInactive]}>{item.active ? 'Ativo' : 'Inativo'}</Text></View>
                 <Text style={styles.role}>{item.role === 'ADMIN' ? 'Administrador' : 'Operador'}</Text>
                 <View style={styles.actions}>
+                  <Pressable accessibilityRole="button" disabled={isSelf} onPress={() => navigation.navigate('ResetUserPassword', { userId: item.id, userName: item.name })} style={[styles.secondaryButton, isSelf && styles.disabled]}><Text style={styles.secondaryText}>Redefinir senha</Text></Pressable>
                   <Pressable accessibilityRole="button" disabled={isSelf} onPress={() => confirmUpdate(item, { role: item.role === 'ADMIN' ? 'OPERATOR' : 'ADMIN' })} style={[styles.secondaryButton, isSelf && styles.disabled]}><Text style={styles.secondaryText}>{item.role === 'ADMIN' ? 'Tornar operador' : 'Promover a admin'}</Text></Pressable>
                   <Pressable accessibilityRole="button" disabled={isSelf} onPress={() => confirmUpdate(item, { active: !item.active })} style={[styles.accessButton, isSelf && styles.disabled]}><Text style={item.active ? styles.deactivateText : styles.activateText}>{item.active ? 'Desativar' : 'Reativar'}</Text></Pressable>
                 </View>

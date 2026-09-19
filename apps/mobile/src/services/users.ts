@@ -11,4 +11,8 @@ export const usersService = {
     method: 'PATCH',
     body: JSON.stringify(input),
   }),
+  resetPassword: (id: string, newPassword: string) => apiRequest<void>(`/api/users/${id}/password`, {
+    method: 'PATCH',
+    body: JSON.stringify({ newPassword }),
+  }),
 };

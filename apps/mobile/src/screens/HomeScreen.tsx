@@ -62,7 +62,10 @@ export function HomeScreen({ navigation }: Props) {
 
       <View style={styles.session}>
         <View><Text style={styles.sessionName}>{user?.name}</Text><Text style={styles.sessionRole}>{user?.role === 'ADMIN' ? 'Administrador' : 'Operador'}</Text></View>
-        <Pressable accessibilityRole="button" onPress={() => void logout()}><Text style={styles.logout}>Sair</Text></Pressable>
+        <View style={styles.sessionActions}>
+          <Pressable accessibilityRole="button" onPress={() => navigation.navigate('ChangePassword')}><Text style={styles.password}>Alterar senha</Text></Pressable>
+          <Pressable accessibilityRole="button" onPress={() => void logout()}><Text style={styles.logout}>Sair</Text></Pressable>
+        </View>
       </View>
 
       <View style={styles.info}>
@@ -93,4 +96,6 @@ const styles = StyleSheet.create({
   sessionName: { color: colors.text, fontSize: 14, fontWeight: '800' },
   sessionRole: { color: colors.textMuted, fontSize: 12, marginTop: 3 },
   logout: { color: colors.danger, fontSize: 14, fontWeight: '800', padding: 8 },
+  password: { color: colors.primary, fontSize: 13, fontWeight: '800', padding: 8 },
+  sessionActions: { alignItems: 'center', flexDirection: 'row', gap: 2 },
 });

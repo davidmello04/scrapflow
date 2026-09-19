@@ -13,6 +13,8 @@ import { LoginScreen } from '../screens/LoginScreen';
 import { ActivityIndicator, View } from 'react-native';
 import { UsersScreen } from '../screens/UsersScreen';
 import { NewUserScreen } from '../screens/NewUserScreen';
+import { ChangePasswordScreen } from '../screens/ChangePasswordScreen';
+import { ResetUserPasswordScreen } from '../screens/ResetUserPasswordScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -50,8 +52,10 @@ export function AppNavigator() {
       />
       <Stack.Screen name="PurchaseHistory" component={PurchaseHistoryScreen} options={{ title: 'Histórico de compras' }} />
       <Stack.Screen name="PurchaseDetail" component={PurchaseDetailScreen} options={{ title: 'Detalhes da compra' }} />
+      <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} options={{ title: 'Alterar senha' }} />
       {user.role === 'ADMIN' && <Stack.Screen name="Users" component={UsersScreen} options={{ title: 'Usuários' }} />}
       {user.role === 'ADMIN' && <Stack.Screen name="NewUser" component={NewUserScreen} options={{ title: 'Novo usuário' }} />}
+      {user.role === 'ADMIN' && <Stack.Screen name="ResetUserPassword" component={ResetUserPasswordScreen} options={{ title: 'Redefinir senha' }} />}
     </Stack.Navigator>
   );
 }

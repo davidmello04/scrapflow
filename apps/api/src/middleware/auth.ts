@@ -14,7 +14,7 @@ export async function authenticate(request: Request, response: Response, next: N
   try {
     const payload = verifyAccessToken(token);
     const user = await User.findOne({ _id: payload.sub, active: true });
-    if (!user) {
+    if (!user || user.sessionVersion !== payload.ver) {
       response.status(401).json({ message: 'Sessão inválida ou usuário inativo.' });
       return;
     }
