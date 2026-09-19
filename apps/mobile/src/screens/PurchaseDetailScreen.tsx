@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { PurchaseDetailsCard } from '../components/PurchaseDetailsCard';
+import { ReceiptActions } from '../components/ReceiptActions';
 import type { RootStackParamList } from '../navigation/types';
 import { purchasesService } from '../services/purchases';
 import { colors } from '../theme';
@@ -43,6 +44,7 @@ export function PurchaseDetailScreen({ route }: Props) {
       <Text style={styles.title}>Detalhes da compra</Text>
       <Text style={styles.subtitle}>Valores e preços registrados no momento da operação.</Text>
       <View style={styles.cardWrapper}><PurchaseDetailsCard purchase={purchase} /></View>
+      <ReceiptActions purchase={purchase} />
     </ScrollView>
   );
 }
