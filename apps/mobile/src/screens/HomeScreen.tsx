@@ -2,6 +2,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import type { RootStackParamList } from '../navigation/types';
 import { colors } from '../theme';
+import { useAuth } from '../auth/AuthContext';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -27,6 +28,8 @@ const actions = [
 ];
 
 export function HomeScreen({ navigation }: Props) {
+  const { user, logout } = useAuth();
+  const visibleActions = actions.filter((action) => action.route !== 'Materials' || user?.role === 'ADMIN');
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <View style={styles.hero}>
@@ -36,7 +39,7 @@ export function HomeScreen({ navigation }: Props) {
       </View>
 
       <View style={styles.grid}>
-        {actions.map((action) => (
+        {visibleActions.map((action) => (
           <Pressable
             accessibilityRole="button"
             key={action.route}
@@ -49,6 +52,11 @@ export function HomeScreen({ navigation }: Props) {
             <Text style={styles.link}>Acessar  →</Text>
           </Pressable>
         ))}
+      </View>
+
+      <View style={styles.session}>
+        <View><Text style={styles.sessionName}>{user?.name}</Text><Text style={styles.sessionRole}>{user?.role === 'ADMIN' ? 'Administrador' : 'Operador'}</Text></View>
+        <Pressable accessibilityRole="button" onPress={() => void logout()}><Text style={styles.logout}>Sair</Text></Pressable>
       </View>
 
       <View style={styles.info}>
@@ -75,4 +83,8 @@ const styles = StyleSheet.create({
   info: { backgroundColor: colors.primarySoft, borderRadius: 16, marginTop: 18, padding: 18 },
   infoTitle: { color: colors.primaryDark, fontSize: 15, fontWeight: '800' },
   infoText: { color: colors.textMuted, fontSize: 13, lineHeight: 19, marginTop: 5 },
+  session: { alignItems: 'center', borderTopColor: colors.border, borderTopWidth: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 22, paddingTop: 18 },
+  sessionName: { color: colors.text, fontSize: 14, fontWeight: '800' },
+  sessionRole: { color: colors.textMuted, fontSize: 12, marginTop: 3 },
+  logout: { color: colors.danger, fontSize: 14, fontWeight: '800', padding: 8 },
 });

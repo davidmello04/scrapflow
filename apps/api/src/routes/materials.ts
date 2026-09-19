@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { Material } from '../models/material.js';
+import { authorize } from '../middleware/auth.js';
 
 const input = z.object({
   name: z.string().trim().min(2).max(80),
@@ -14,12 +15,12 @@ materialsRouter.get('/', async (_request, response) => {
   response.json(materials);
 });
 
-materialsRouter.post('/', async (request, response) => {
+materialsRouter.post('/', authorize('ADMIN'), async (request, response) => {
   const material = await Material.create(input.parse(request.body));
   response.status(201).json(material);
 });
 
-materialsRouter.patch('/:id', async (request, response) => {
+materialsRouter.patch('/:id', authorize('ADMIN'), async (request, response) => {
   const material = await Material.findByIdAndUpdate(
     request.params.id,
     input.partial().parse(request.body),
@@ -29,7 +30,7 @@ materialsRouter.patch('/:id', async (request, response) => {
   response.json(material);
 });
 
-materialsRouter.delete('/:id', async (request, response) => {
+materialsRouter.delete('/:id', authorize('ADMIN'), async (request, response) => {
   const material = await Material.findByIdAndUpdate(request.params.id, { active: false }, { new: true });
   if (!material) return response.status(404).json({ message: 'Material não encontrado.' });
   response.status(204).send();
