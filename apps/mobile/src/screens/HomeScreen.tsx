@@ -13,6 +13,12 @@ const actions = [
     route: 'NewPurchase' as const,
   },
   {
+    title: 'Histórico de compras',
+    description: 'Consulte operações anteriores, pesquise vendedores e confira os valores persistidos.',
+    badge: 'HISTÓRICO',
+    route: 'PurchaseHistory' as const,
+  },
+  {
     title: 'Materiais e preços',
     description: 'Cadastre materiais e mantenha atualizado o valor pago por quilograma.',
     badge: 'CATÁLOGO',

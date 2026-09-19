@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { calculateSubtotal } from '../domain/money.js';
+import { buildPurchaseFilter } from '../domain/purchase-filter.js';
 import { Material } from '../models/material.js';
 import { Purchase } from '../models/purchase.js';
 
@@ -14,8 +15,14 @@ const input = z.object({
 
 export const purchasesRouter = Router();
 
-purchasesRouter.get('/', async (_request, response) => {
-  const purchases = await Purchase.find().sort({ createdAt: -1 }).limit(100);
+const historyQuery = z.object({
+  search: z.string().trim().max(100).optional(),
+  days: z.coerce.number().int().pipe(z.union([z.literal(7), z.literal(30)])).optional(),
+});
+
+purchasesRouter.get('/', async (request, response) => {
+  const filters = historyQuery.parse(request.query);
+  const purchases = await Purchase.find(buildPurchaseFilter(filters)).sort({ createdAt: -1 }).limit(100);
   response.json(purchases);
 });
 

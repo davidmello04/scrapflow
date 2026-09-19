@@ -19,3 +19,8 @@ export type CreatePurchaseInput = {
   sellerName: string;
   items: Array<{ materialId: string; weightInGrams: number }>;
 };
+
+export type PurchaseHistoryFilters = {
+  search?: string;
+  days?: 7 | 30;
+};
