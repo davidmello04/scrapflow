@@ -14,6 +14,7 @@ O ScrapFlow organiza o fluxo diário de um ponto de compra de recicláveis:
 - fluxo mobile com vendedor, pesos, prévia e confirmação do total oficial;
 - histórico com busca por vendedor, filtros de período e detalhe persistido;
 - comprovante PDF com impressão e compartilhamento pelo dispositivo;
+- autenticação com sessão segura e perfis `ADMIN` e `OPERATOR`;
 - cálculo automático de subtotais e total;
 - histórico de operações;
 - base preparada para emissão e compartilhamento de comprovantes em PDF.
@@ -56,6 +57,7 @@ npm install
 cp apps/api/.env.example apps/api/.env
 cp apps/mobile/.env.example apps/mobile/.env
 docker compose up -d mongo
+npm run auth:create-admin --workspace @scrapflow/api
 npm run dev:api
 ```
 
@@ -68,6 +70,8 @@ npm run dev:mobile
 A API responde em `http://localhost:3333`; sua verificação de saúde fica em `GET /health`.
 
 > Em um celular físico, configure `EXPO_PUBLIC_API_URL` com o IP local do computador em vez de `localhost`.
+
+Antes de criar o primeiro administrador, defina `JWT_SECRET`, `ADMIN_NAME`, `ADMIN_EMAIL` e `ADMIN_PASSWORD` em `apps/api/.env`. O script não cria senha padrão, não sobrescreve contas e não é executado automaticamente.
 
 ## Endpoints iniciais
 
@@ -105,7 +109,7 @@ A API responde em `http://localhost:3333`; sua verificação de saúde fica em `
 - [x] Registro de compras com cálculo no servidor
 - [x] Fluxo mobile completo para registrar compras
 - [x] Histórico mobile com busca, períodos e detalhes
-- [ ] Autenticação e perfis de acesso
+- [x] Autenticação e perfis de acesso
 - [ ] Cadastro de vendedores/fornecedores
 - [ ] Filtros, indicadores e dashboard
 - [x] Geração e compartilhamento de comprovante em PDF

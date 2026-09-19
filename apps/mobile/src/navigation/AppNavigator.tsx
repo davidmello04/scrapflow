@@ -8,10 +8,21 @@ import { PurchaseDetailScreen } from '../screens/PurchaseDetailScreen';
 import { PurchaseHistoryScreen } from '../screens/PurchaseHistoryScreen';
 import { colors } from '../theme';
 import type { RootStackParamList } from './types';
+import { useAuth } from '../auth/AuthContext';
+import { LoginScreen } from '../screens/LoginScreen';
+import { ActivityIndicator, View } from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function AppNavigator() {
+  const { user, loading } = useAuth();
+
+  if (loading) return <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator color={colors.primary} size="large" /></View>;
+
+  if (!user) {
+    return <Stack.Navigator screenOptions={{ headerShown: false }}><Stack.Screen name="Login" component={LoginScreen} /></Stack.Navigator>;
+  }
+
   return (
     <Stack.Navigator
       initialRouteName="Home"
