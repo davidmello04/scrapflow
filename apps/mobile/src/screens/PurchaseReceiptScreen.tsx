@@ -1,6 +1,7 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import type { RootStackParamList } from '../navigation/types';
+import { ReceiptActions } from '../components/ReceiptActions';
 import { colors } from '../theme';
 import { formatCurrencyFromCents } from '../utils/currency';
 import { formatWeightFromGrams } from '../utils/weight';
@@ -43,6 +44,8 @@ export function PurchaseReceiptScreen({ navigation, route }: Props) {
           <Text style={styles.totalValue}>{formatCurrencyFromCents(purchase.totalInCents)}</Text>
         </View>
       </View>
+
+      <ReceiptActions purchase={purchase} />
 
       <Pressable accessibilityRole="button" onPress={() => navigation.replace('NewPurchase')} style={styles.primaryButton}>
         <Text style={styles.primaryText}>Registrar outra compra</Text>

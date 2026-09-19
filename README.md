@@ -13,6 +13,7 @@ O ScrapFlow organiza o fluxo diário de um ponto de compra de recicláveis:
 - registro de compras com múltiplos itens;
 - fluxo mobile com vendedor, pesos, prévia e confirmação do total oficial;
 - histórico com busca por vendedor, filtros de período e detalhe persistido;
+- comprovante PDF com impressão e compartilhamento pelo dispositivo;
 - cálculo automático de subtotais e total;
 - histórico de operações;
 - base preparada para emissão e compartilhamento de comprovantes em PDF.
@@ -107,7 +108,7 @@ A API responde em `http://localhost:3333`; sua verificação de saúde fica em `
 - [ ] Autenticação e perfis de acesso
 - [ ] Cadastro de vendedores/fornecedores
 - [ ] Filtros, indicadores e dashboard
-- [ ] Geração e compartilhamento de comprovante em PDF
+- [x] Geração e compartilhamento de comprovante em PDF
 - [ ] Testes de integração e cobertura ampliada
 - [ ] Screenshots e vídeo demonstrativo
 - [ ] Deploy de demonstração
