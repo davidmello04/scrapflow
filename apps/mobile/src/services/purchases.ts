@@ -1,4 +1,4 @@
-import type { CreatePurchaseInput, Purchase } from '../types/purchase';
+import type { CreatePurchaseInput, Purchase, PurchaseHistoryFilters } from '../types/purchase';
 import { apiRequest } from './api';
 
 export const purchasesService = {
@@ -6,6 +6,12 @@ export const purchasesService = {
     method: 'POST',
     body: JSON.stringify(input),
   }),
-  list: () => apiRequest<Purchase[]>('/api/purchases'),
+  list: (filters: PurchaseHistoryFilters = {}) => {
+    const query = new URLSearchParams();
+    if (filters.search?.trim()) query.set('search', filters.search.trim());
+    if (filters.days) query.set('days', String(filters.days));
+    const suffix = query.size ? `?${query.toString()}` : '';
+    return apiRequest<Purchase[]>(`/api/purchases${suffix}`);
+  },
   get: (id: string) => apiRequest<Purchase>(`/api/purchases/${id}`),
 };

@@ -7,4 +7,6 @@ export type RootStackParamList = {
   MaterialForm: { material?: Material } | undefined;
   NewPurchase: undefined;
   PurchaseReceipt: { purchase: Purchase };
+  PurchaseHistory: undefined;
+  PurchaseDetail: { purchaseId: string };
 };

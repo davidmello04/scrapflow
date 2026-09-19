@@ -4,6 +4,8 @@ import { MaterialsScreen } from '../screens/MaterialsScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { NewPurchaseScreen } from '../screens/NewPurchaseScreen';
 import { PurchaseReceiptScreen } from '../screens/PurchaseReceiptScreen';
+import { PurchaseDetailScreen } from '../screens/PurchaseDetailScreen';
+import { PurchaseHistoryScreen } from '../screens/PurchaseHistoryScreen';
 import { colors } from '../theme';
 import type { RootStackParamList } from './types';
 
@@ -33,6 +35,8 @@ export function AppNavigator() {
         component={PurchaseReceiptScreen}
         options={{ title: 'Compra registrada', headerBackVisible: false }}
       />
+      <Stack.Screen name="PurchaseHistory" component={PurchaseHistoryScreen} options={{ title: 'Histórico de compras' }} />
+      <Stack.Screen name="PurchaseDetail" component={PurchaseDetailScreen} options={{ title: 'Detalhes da compra' }} />
     </Stack.Navigator>
   );
 }

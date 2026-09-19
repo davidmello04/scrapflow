@@ -12,6 +12,7 @@ O ScrapFlow organiza o fluxo diário de um ponto de compra de recicláveis:
 - aplicativo com navegação, listagem, cadastro, edição e desativação de materiais;
 - registro de compras com múltiplos itens;
 - fluxo mobile com vendedor, pesos, prévia e confirmação do total oficial;
+- histórico com busca por vendedor, filtros de período e detalhe persistido;
 - cálculo automático de subtotais e total;
 - histórico de operações;
 - base preparada para emissão e compartilhamento de comprovantes em PDF.
@@ -102,6 +103,7 @@ A API responde em `http://localhost:3333`; sua verificação de saúde fica em `
 - [x] Catálogo de materiais com telas mobile funcionais
 - [x] Registro de compras com cálculo no servidor
 - [x] Fluxo mobile completo para registrar compras
+- [x] Histórico mobile com busca, períodos e detalhes
 - [ ] Autenticação e perfis de acesso
 - [ ] Cadastro de vendedores/fornecedores
 - [ ] Filtros, indicadores e dashboard
