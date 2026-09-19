@@ -4,6 +4,7 @@ import { validateUserAccessChange } from '../domain/user-access.js';
 import { authorize } from '../middleware/auth.js';
 import { User, userRoles } from '../models/user.js';
 import { hashPassword } from '../services/password.js';
+import { validateAdminPasswordReset } from '../domain/password-change.js';
 
 const createInput = z.object({
   name: z.string().trim().min(2).max(100),
@@ -17,6 +18,10 @@ const updateInput = z.object({
   role: z.enum(userRoles).optional(),
   active: z.boolean().optional(),
 }).refine((value) => Object.keys(value).length > 0, 'Informe ao menos uma alteração.');
+
+const resetPasswordInput = z.object({
+  newPassword: z.string().min(10).max(200),
+});
 
 function publicUser(user: { _id: { toString(): string }; name: string; email: string; role: string; active: boolean; createdAt: Date; updatedAt: Date }) {
   return { id: user._id.toString(), name: user.name, email: user.email, role: user.role, active: user.active, createdAt: user.createdAt, updatedAt: user.updatedAt };
@@ -74,4 +79,24 @@ usersRouter.patch('/:id', async (request, response) => {
   if (input.active !== undefined) user.active = input.active;
   await user.save();
   response.json(publicUser(user));
+});
+
+usersRouter.patch('/:id/password', async (request, response) => {
+  const input = resetPasswordInput.parse(request.body);
+  const violation = validateAdminPasswordReset(request.user!.id, request.params.id);
+  if (violation) {
+    response.status(409).json({ message: violation });
+    return;
+  }
+
+  const user = await User.findById(request.params.id).select('+passwordHash');
+  if (!user) {
+    response.status(404).json({ message: 'Usuário não encontrado.' });
+    return;
+  }
+
+  user.passwordHash = await hashPassword(input.newPassword);
+  user.sessionVersion += 1;
+  await user.save();
+  response.status(204).send();
 });

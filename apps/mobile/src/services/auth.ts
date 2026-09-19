@@ -7,4 +7,8 @@ export const authService = {
     body: JSON.stringify({ email, password }),
   }),
   me: () => apiRequest<AuthUser>('/api/auth/me'),
+  changePassword: (currentPassword: string, newPassword: string) => apiRequest<void>('/api/auth/change-password', {
+    method: 'POST',
+    body: JSON.stringify({ currentPassword, newPassword }),
+  }),
 };

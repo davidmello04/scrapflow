@@ -2,7 +2,7 @@ import jwt, { type SignOptions } from 'jsonwebtoken';
 import { env } from '../config/env.js';
 import type { UserRole } from '../models/user.js';
 
-type AccessTokenPayload = { sub: string; role: UserRole };
+type AccessTokenPayload = { sub: string; role: UserRole; ver: number };
 
 export function signAccessToken(payload: AccessTokenPayload) {
   return jwt.sign(payload, env.JWT_SECRET, {

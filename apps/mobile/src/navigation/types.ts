@@ -12,4 +12,6 @@ export type RootStackParamList = {
   PurchaseDetail: { purchaseId: string };
   Users: undefined;
   NewUser: undefined;
+  ChangePassword: undefined;
+  ResetUserPassword: { userId: string; userName: string };
 };

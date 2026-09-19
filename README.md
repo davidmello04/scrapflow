@@ -16,6 +16,7 @@ O ScrapFlow organiza o fluxo diário de um ponto de compra de recicláveis:
 - comprovante PDF com impressão e compartilhamento pelo dispositivo;
 - autenticação com sessão segura e perfis `ADMIN` e `OPERATOR`;
 - administração de contas com criação, papéis e ativação/desativação segura;
+- troca da própria senha e redefinição administrativa com revogação de sessões anteriores;
 - cálculo automático de subtotais e total;
 - histórico de operações;
 - base preparada para emissão e compartilhamento de comprovantes em PDF.
@@ -86,6 +87,10 @@ Antes de criar o primeiro administrador, defina `JWT_SECRET`, `ADMIN_NAME`, `ADM
 | `GET` | `/api/purchases` | Listar compras |
 | `POST` | `/api/purchases` | Registrar compra e calcular total |
 | `GET` | `/api/purchases/:id` | Consultar uma compra |
+| `POST` | `/api/auth/change-password` | Alterar a própria senha |
+| `GET` | `/api/users` | Listar contas (administrador) |
+| `POST` | `/api/users` | Criar conta (administrador) |
+| `PATCH` | `/api/users/:id/password` | Redefinir senha e revogar sessões (administrador) |
 
 ## Decisões de domínio
 
@@ -100,6 +105,7 @@ Antes de criar o primeiro administrador, defina `JWT_SECRET`, `ADMIN_NAME`, `ADM
 - nenhuma credencial é versionada;
 - variáveis de ambiente são validadas na inicialização;
 - entradas da API são validadas com Zod;
+- senhas usam hash bcrypt e alterações revogam os tokens emitidos anteriormente;
 - os repositórios históricos permanecem privados;
 - qualquer credencial do projeto anterior deve ser revogada e nunca reutilizada.
 
@@ -111,6 +117,7 @@ Antes de criar o primeiro administrador, defina `JWT_SECRET`, `ADMIN_NAME`, `ADM
 - [x] Fluxo mobile completo para registrar compras
 - [x] Histórico mobile com busca, períodos e detalhes
 - [x] Autenticação e perfis de acesso
+- [x] Gestão de usuários e senhas
 - [ ] Cadastro de vendedores/fornecedores
 - [ ] Filtros, indicadores e dashboard
 - [x] Geração e compartilhamento de comprovante em PDF
